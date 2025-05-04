@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Autofill</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="popup-root">
+    <div class="popup-container">
+      <header class="popup-header">
+        <h1>Personal Autofill</h1>
+      </header>
+      
+      <nav class="tabs">
+        <button class="tab-button active" data-tab="profile">Profile</button>
+        <button class="tab-button" data-tab="autofill">Autofill</button>
+        <button class="tab-button" data-tab="history">History</button>
+      </nav>
+      
+      <main class="tab-content">
+        <!-- Profile Tab -->
+        <section class="tab-pane active" id="profile-tab">
+          <p>Your personal information will be loaded from storage.</p>
+          <button id="edit-profile-btn" class="primary-button">Edit Profile</button>
+          <button id="fill-form-btn" class="primary-button">Fill Current Form</button>
+        </section>
+        
+        <!-- Autofill Tab -->
+        <section class="tab-pane" id="autofill-tab">
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="enable-autofill" checked>
+              Enable Autofill
+            </label>
+          </div>
+          
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="autofill-on-load">
+              Automatically fill forms when page loads
+            </label>
+          </div>
+          
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="show-notifications" checked>
+              Show notification when forms are filled
+            </label>
+          </div>
+          
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="fill-only-empty" checked>
+              Only fill empty fields
+            </label>
+          </div>
+        </section>
+        
+        <!-- History Tab -->
+        <section class="tab-pane" id="history-tab">
+          <div class="history-list">
+            <p>Your autofill history will appear here.</p>
+          </div>
+          <button id="clear-history-btn" class="secondary-button">Clear History</button>
+        </section>
+      </main>
+      
+      <footer class="popup-footer">
+        <button id="options-btn" class="text-button">Options</button>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

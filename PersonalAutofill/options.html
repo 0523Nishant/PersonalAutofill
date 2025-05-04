@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Autofill - Options</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="options-page">
+  <div id="options-root">
+    <header class="options-header">
+      <h1>Personal Autofill Options</h1>
+      <p>Manage your profile and autofill settings</p>
+    </header>
+    
+    <main class="options-container">
+      <div class="options-sidebar">
+        <nav class="options-nav">
+          <button class="nav-item active" data-section="profile">Profile</button>
+          <button class="nav-item" data-section="autofill">Autofill Settings</button>
+          <button class="nav-item" data-section="field-mapping">Field Mapping</button>
+          <button class="nav-item" data-section="history">History</button>
+          <button class="nav-item" data-section="about">About</button>
+        </nav>
+      </div>
+      
+      <div class="options-content">
+        <!-- Profile Section -->
+        <section class="options-section active" id="profile-section">
+          <h2>Personal Information</h2>
+          <form id="profile-form">
+            <div class="form-section">
+              <h3>Basic Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="gender">Gender</label>
+                  <select id="gender" name="gender">
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="prefer-not-to-say">Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3>Address</h3>
+              <div class="form-group">
+                <label for="streetAddress">Street Address</label>
+                <input type="text" id="streetAddress" name="streetAddress">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" name="city">
+                </div>
+                <div class="form-group">
+                  <label for="state">State/Province</label>
+                  <input type="text" id="state" name="state">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="zipCode">ZIP/Postal Code</label>
+                  <input type="text" id="zipCode" name="zipCode">
+                </div>
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <select id="country" name="country">
+                    <option value="">Select a country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="FR">France</option>
+                    <option value="DE">Germany</option>
+                    <option value="JP">Japan</option>
+                    <option value="CN">China</option>
+                    <option value="IN">India</option>
+                    <option value="BR">Brazil</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3>Education</h3>
+              <div class="form-group">
+                <label for="school">School/University</label>
+                <input type="text" id="school" name="school">
+              </div>
+              
+              <div class="form-group">
+                <label for="degree">Degree/Certificate</label>
+                <input type="text" id="degree" name="degree">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group date-group">
+                  <label>Start Date</label>
+                  <div class="date-inputs">
+                    <select id="educationStartMonth" name="educationStartMonth">
+                      <option value="">Month</option>
+                      <option value="01">January</option>
+                      <option value="02">February</option>
+                      <option value="03">March</option>
+                      <option value="04">April</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">August</option>
+                      <option value="09">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                    <input type="text" id="educationStartYear" name="educationStartYear" placeholder="Year">
+                  </div>
+                </div>
+                
+                <div class="form-group date-group">
+                  <label>End Date</label>
+                  <div class="date-inputs">
+                    <select id="educationEndMonth" name="educationEndMonth">
+                      <option value="">Month</option>
+                      <option value="01">January</option>
+                      <option value="02">February</option>
+                      <option value="03">March</option>
+                      <option value="04">April</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">August</option>
+                      <option value="09">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                    <input type="text" id="educationEndYear" name="educationEndYear" placeholder="Year">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3>Payment Information</h3>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="enablePayment" name="enablePayment">
+                  Enable payment information for autofill
+                </label>
+              </div>
+              
+              <div id="payment-fields" class="hidden">
+                <div class="form-group">
+                  <label for="cardholderName">Cardholder Name</label>
+                  <input type="text" id="cardholderName" name="cardholderName">
+                </div>
+                
+                <div class="form-group">
+                  <label for="cardNumber">Card Number</label>
+                  <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="XXXX XXXX XXXX XXXX">
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="expDate">Expiration Date</label>
+                    <input type="text" id="expDate" name="expDate" placeholder="MM/YY" maxlength="5">
+                  </div>
+                  <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="XXX">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3>Professional Documents</h3>
+              <div class="form-group">
+                <label for="resumeFile">Resume (PDF)</label>
+                <input type="file" id="resumeFile" name="resumeFile" accept=".pdf">
+              </div>
+              
+              <div class="form-group">
+                <label for="coverLetter">Cover Letter</label>
+                <textarea id="coverLetter" name="coverLetter" rows="4"></textarea>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3>Social Profiles</h3>
+              <div class="form-group">
+                <label for="linkedinUrl">LinkedIn URL</label>
+                <input type="url" id="linkedinUrl" name="linkedinUrl" placeholder="https://linkedin.com/in/username">
+              </div>
+              
+              <div class="form-group">
+                <label for="githubUrl">GitHub URL</label>
+                <input type="url" id="githubUrl" name="githubUrl" placeholder="https://github.com/username">
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Save Profile</button>
+              <button type="button" id="reset-profile" class="secondary-button">Reset Form</button>
+            </div>
+          </form>
+        </section>
+        
+        <!-- Autofill Settings Section -->
+        <section class="options-section" id="autofill-section">
+          <h2>Autofill Settings</h2>
+          <form id="settings-form">
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="settings-enabled" name="enabled" checked>
+                Enable Autofill
+              </label>
+              <p class="help-text">Turn on autofill functionality</p>
+            </div>
+            
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="settings-autoFillOnLoad" name="autoFillOnLoad">
+                Automatically fill forms when page loads
+              </label>
+              <p class="help-text">Forms will be automatically filled when you visit a page</p>
+            </div>
+            
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="settings-showFillNotification" name="showFillNotification" checked>
+                Show notification when forms are filled
+              </label>
+              <p class="help-text">Display a notification after autofill is completed</p>
+            </div>
+            
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="settings-fillOnlyEmpty" name="fillOnlyEmpty" checked>
+                Only fill empty fields
+              </label>
+              <p class="help-text">Skip fields that already have values</p>
+            </div>
+            
+            <div class="form-group">
+              <label for="settings-fillDelay">Fill Delay (ms)</label>
+              <input type="number" id="settings-fillDelay" name="fillDelay" min="0" max="1000" value="200">
+              <p class="help-text">Delay between filling fields (0-1000ms)</p>
+            </div>
+            
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="settings-trackHistory" name="trackHistory" checked>
+                Track autofill history
+              </label>
+              <p class="help-text">Save records of autofill operations</p>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Save Settings</button>
+              <button type="button" id="reset-settings" class="secondary-button">Reset to Defaults</button>
+            </div>
+          </form>
+        </section>
+        
+        <!-- Field Mapping Section -->
+        <section class="options-section" id="field-mapping-section">
+          <h2>Field Mapping</h2>
+          <p>Customize how your data maps to form fields on websites.</p>
+          
+          <div class="field-mapping-container">
+            <div class="mapping-profile">
+              <label for="mapping-profile-select">Mapping Profile:</label>
+              <select id="mapping-profile-select">
+                <option value="standard">Standard</option>
+                <option value="job-applications">Job Applications</option>
+                <option value="shopping">Shopping</option>
+                <option value="custom">Custom</option>
+              </select>
+              <button id="new-profile-btn" class="text-button">New Profile</button>
+            </div>
+            
+            <div class="field-map-list">
+              <!-- Field mapping entries will be generated here -->
+              <p>Field mappings will appear here when a profile is selected.</p>
+            </div>
+            
+            <div class="form-actions">
+              <button id="save-mapping" class="primary-button">Save Mapping</button>
+              <button id="reset-mapping" class="secondary-button">Reset Mapping</button>
+            </div>
+          </div>
+        </section>
+        
+        <!-- History Section -->
+        <section class="options-section" id="history-section">
+          <h2>Autofill History</h2>
+          <div class="history-controls">
+            <input type="text" id="history-search" placeholder="Search history...">
+            <button id="clear-all-history" class="secondary-button">Clear All History</button>
+          </div>
+          
+          <div class="history-table-container">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Website</th>
+                  <th>Fields Filled</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <!-- History entries will be generated here -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="options-section" id="about-section">
+          <h2>About Personal Autofill</h2>
+          <div class="about-content">
+            <p>
+              <strong>Version:</strong> 1.0.0<br>
+              <strong>Last Updated:</strong> May 2023
+            </p>
+            
+            <h3>How to Use</h3>
+            <p>
+              Personal Autofill helps you save time by automatically filling out web forms with your information. Simply enter your details once, and let the extension handle the rest.
+            </p>
+            
+            <ol>
+              <li>Enter your personal information in the Profile tab</li>
+              <li>Customize your autofill settings as needed</li>
+              <li>Click the extension icon when visiting a form</li>
+              <li>Click "Fill Current Form" to autofill</li>
+            </ol>
+            
+            <h3>Privacy</h3>
+            <p>
+              All your data is stored locally on your device. Personal Autofill does not send your information to any server or third party.
+            </p>
+            
+            <h3>Support</h3>
+            <p>
+              If you encounter any issues or have questions, please contact support at <a href="mailto:support@personalautofill.example.com">support@personalautofill.example.com</a>.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
