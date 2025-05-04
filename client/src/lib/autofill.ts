@@ -1,18 +1,46 @@
 import { getUserData, getSettings, addAutofillHistoryItem } from './storage';
 import { UserData, Settings, AutofillHistoryItem, AutofillResult } from './types';
 
+// Chrome API types for TypeScript
+interface Chrome {
+  runtime: {
+    sendMessage: (message: any) => void;
+  };
+}
+
+// Declare chrome as a global variable
+declare var chrome: Chrome | undefined;
+
 // Common form field types and their identifiers
 const FIELD_IDENTIFIERS = {
   firstName: ['first.*name', 'firstname', 'first-name', 'fname', 'given.*name', 'givenname'],
   lastName: ['last.*name', 'lastname', 'last-name', 'lname', 'surname', 'family.*name', 'familyname'],
   fullName: ['full.*name', 'fullname', 'name', 'your.*name'],
   email: ['email', 'e-mail', 'mail'],
+  gender: ['gender', 'sex'],
   phone: ['phone', 'telephone', 'tel', 'mobile', 'cell'],
   address: ['address', 'street', 'addr', 'line1', 'address1', 'addressline1'],
   city: ['city', 'town', 'township'],
   state: ['state', 'province', 'region', 'county', 'district'],
   zipCode: ['zip', 'postal', 'postcode', 'postalcode', 'zip.*code'],
   country: ['country', 'nation'],
+  
+  // Education fields
+  school: ['school', 'university', 'college', 'institution', 'education.*institution', 'alma.*mater'],
+  degree: ['degree', 'qualification', 'major', 'certification', 'diploma'],
+  educationStartMonth: ['education.*start.*month', 'start.*month', 'from.*month', 'begin.*month'],
+  educationStartYear: ['education.*start.*year', 'start.*year', 'from.*year', 'begin.*year'],
+  educationEndMonth: ['education.*end.*month', 'end.*month', 'to.*month', 'completion.*month'],
+  educationEndYear: ['education.*end.*year', 'end.*year', 'to.*year', 'completion.*year'],
+  
+  // Professional documents
+  coverLetter: ['cover.*letter', 'coverletter', 'motivation.*letter', 'motivationletter', 'application.*letter'],
+  
+  // Social profiles
+  linkedinUrl: ['linkedin', 'linkedin.*url', 'linkedin.*profile', 'linkedin.*link'],
+  githubUrl: ['github', 'github.*url', 'github.*profile', 'github.*link', 'code.*repository', 'source.*control'],
+  
+  // Payment fields
   cardNumber: ['card.*number', 'cardnumber', 'cc.*number', 'ccnumber', 'credit.*card', 'creditcard'],
   expDate: ['exp.*date', 'expiry', 'expiration', 'cc-exp', 'cc.*exp'],
   cvv: ['cvv', 'cvc', 'csc', 'cvv2', 'security.*code', 'securitycode'],
@@ -158,6 +186,11 @@ export const triggerAutofill = async (): Promise<AutofillResult> => {
       continue;
     }
     
+    // Skip resumeFile field as it requires special handling and isn't directly fillable
+    if (field === 'resumeFile') {
+      continue;
+    }
+    
     // Get the value from user data
     const value = (userData as any)[field];
     if (!value) continue;
@@ -217,12 +250,16 @@ export const triggerAutofill = async (): Promise<AutofillResult> => {
   }
   
   // Show notification if enabled
-  if (settings.showFillNotification && typeof chrome !== 'undefined' && chrome.runtime) {
-    chrome.runtime.sendMessage({
-      action: 'showNotification',
-      title: 'AutoFill Complete',
-      message
-    });
+  if (settings.showFillNotification) {
+    // Check if we're in a Chrome extension context
+    const chromeObj = (window as any).chrome;
+    if (chromeObj && chromeObj.runtime) {
+      chromeObj.runtime.sendMessage({
+        action: 'showNotification',
+        title: 'AutoFill Complete',
+        message
+      });
+    }
   }
   
   return {
