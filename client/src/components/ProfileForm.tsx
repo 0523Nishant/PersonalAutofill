@@ -17,17 +17,32 @@ const profileSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email("Invalid email address"),
+  gender: z.string().optional(),
   phone: z.string().optional(),
   streetAddress: z.string().optional(),
   city: z.string().optional(),
   state: z.string().optional(),
   zipCode: z.string().optional(),
   country: z.string().optional(),
+  resumeFile: z.string().optional(),
+  coverLetter: z.string().optional(),
   enablePayment: z.boolean().default(false),
   cardNumber: z.string().optional(),
   expDate: z.string().optional(),
   cvv: z.string().optional(),
   cardholderName: z.string().optional(),
+  
+  // Education fields
+  school: z.string().optional(),
+  degree: z.string().optional(),
+  educationStartMonth: z.string().optional(),
+  educationStartYear: z.string().optional(),
+  educationEndMonth: z.string().optional(),
+  educationEndYear: z.string().optional(),
+  
+  // Social profiles
+  linkedinUrl: z.string().url("Invalid LinkedIn URL").optional().or(z.literal("")),
+  githubUrl: z.string().url("Invalid GitHub URL").optional().or(z.literal(""))
 });
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
@@ -43,17 +58,32 @@ const ProfileForm = () => {
       firstName: "",
       lastName: "",
       email: "",
+      gender: "",
       phone: "",
       streetAddress: "",
       city: "",
       state: "",
       zipCode: "",
       country: "",
+      resumeFile: "",
+      coverLetter: "",
       enablePayment: false,
       cardNumber: "",
       expDate: "",
       cvv: "",
       cardholderName: "",
+      
+      // Education
+      school: "",
+      degree: "",
+      educationStartMonth: "",
+      educationStartYear: "",
+      educationEndMonth: "",
+      educationEndYear: "",
+      
+      // Social profiles
+      linkedinUrl: "",
+      githubUrl: ""
     }
   });
 
@@ -163,6 +193,33 @@ const ProfileForm = () => {
                   <FormControl>
                     <Input {...field} id="email" type="email" />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="gender">Gender</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger id="gender">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="non-binary">Non-binary</SelectItem>
+                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -284,6 +341,149 @@ const ProfileForm = () => {
           </div>
         </div>
         
+        {/* Education Information Section */}
+        <div>
+          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+            Education
+          </h2>
+          
+          <div className="space-y-3">
+            <FormField
+              control={form.control}
+              name="school"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="school">School/University</FormLabel>
+                  <FormControl>
+                    <Input {...field} id="school" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="degree"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="degree">Degree/Certificate</FormLabel>
+                  <FormControl>
+                    <Input {...field} id="degree" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <h3 className="text-xs font-medium text-gray-600 mb-2">Start Date</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <FormField
+                    control={form.control}
+                    name="educationStartMonth"
+                    render={({ field }) => (
+                      <FormItem>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger id="educationStartMonth">
+                              <SelectValue placeholder="Month" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="01">January</SelectItem>
+                            <SelectItem value="02">February</SelectItem>
+                            <SelectItem value="03">March</SelectItem>
+                            <SelectItem value="04">April</SelectItem>
+                            <SelectItem value="05">May</SelectItem>
+                            <SelectItem value="06">June</SelectItem>
+                            <SelectItem value="07">July</SelectItem>
+                            <SelectItem value="08">August</SelectItem>
+                            <SelectItem value="09">September</SelectItem>
+                            <SelectItem value="10">October</SelectItem>
+                            <SelectItem value="11">November</SelectItem>
+                            <SelectItem value="12">December</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="educationStartYear"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input {...field} id="educationStartYear" placeholder="Year" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-xs font-medium text-gray-600 mb-2">End Date</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <FormField
+                    control={form.control}
+                    name="educationEndMonth"
+                    render={({ field }) => (
+                      <FormItem>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger id="educationEndMonth">
+                              <SelectValue placeholder="Month" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="01">January</SelectItem>
+                            <SelectItem value="02">February</SelectItem>
+                            <SelectItem value="03">March</SelectItem>
+                            <SelectItem value="04">April</SelectItem>
+                            <SelectItem value="05">May</SelectItem>
+                            <SelectItem value="06">June</SelectItem>
+                            <SelectItem value="07">July</SelectItem>
+                            <SelectItem value="08">August</SelectItem>
+                            <SelectItem value="09">September</SelectItem>
+                            <SelectItem value="10">October</SelectItem>
+                            <SelectItem value="11">November</SelectItem>
+                            <SelectItem value="12">December</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="educationEndYear"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input {...field} id="educationEndYear" placeholder="Year" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         {/* Payment Information Section */}
         <div>
           <div className="flex items-center justify-between mb-3">
@@ -385,6 +585,110 @@ const ProfileForm = () => {
                       id="cardholderName" 
                       disabled={!enablePayment} 
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        {/* Professional Documents Section */}
+        <div>
+          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+            Professional Documents
+          </h2>
+          
+          <div className="space-y-3">
+            <FormField
+              control={form.control}
+              name="resumeFile"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="resumeFile">Resume (PDF)</FormLabel>
+                  <FormControl>
+                    <div className="flex">
+                      <Input 
+                        type="file" 
+                        id="resumeFile" 
+                        accept=".pdf"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              field.onChange(event.target?.result);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                      {field.value && (
+                        <Button 
+                          type="button" 
+                          variant="outline" 
+                          className="ml-2"
+                          onClick={() => field.onChange("")}
+                        >
+                          Clear
+                        </Button>
+                      )}
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="coverLetter"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="coverLetter">Cover Letter</FormLabel>
+                  <FormControl>
+                    <textarea 
+                      {...field} 
+                      id="coverLetter" 
+                      className="min-h-[120px] w-full resize-y rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+        
+        {/* Social Profiles Section */}
+        <div>
+          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+            Social Profiles
+          </h2>
+          
+          <div className="space-y-3">
+            <FormField
+              control={form.control}
+              name="linkedinUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="linkedinUrl">LinkedIn URL</FormLabel>
+                  <FormControl>
+                    <Input {...field} id="linkedinUrl" placeholder="https://linkedin.com/in/username" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="githubUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="githubUrl">GitHub URL</FormLabel>
+                  <FormControl>
+                    <Input {...field} id="githubUrl" placeholder="https://github.com/username" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
